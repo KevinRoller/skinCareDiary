@@ -9,6 +9,7 @@ import sys
 import io
 from PIL import Image
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 import cv2
 import datetime
 
@@ -26,7 +27,7 @@ file_path="./stored_image/"
 #     pass
 
 app = FastAPI()
-
+app.mount("/imgs", StaticFiles(directory="./stored_image"), name="static")
 # if settings.USE_NGROK:
 # pyngrok should only ever be installed or initialized in a dev environment when this flag is set
 # from pyngrok import ngrok
