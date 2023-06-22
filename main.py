@@ -84,7 +84,7 @@ async def create_upload_file(file: UploadFile):#=File(...)):
     # except Exception as e:
     #     print(str(e))
     rand_file_name=generate_random_token()+".jpg"
-    pil_image=Image.open(io.BytesIO(content))
+    pil_image=Image.open(io.BytesIO(content)).convert("RGB")
     cv2_image,ance_count=predictor_api(pil_image)
     cv2.imwrite(file_path+rand_file_name,cv2_image)
     # pil_image.save(file_path+rand_file_name)
