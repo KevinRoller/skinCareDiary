@@ -89,7 +89,7 @@ async def create_upload_file(file: UploadFile):#=File(...)):
     # pil_image.save(file_path+rand_file_name)
 
     #return {"abc":"xyz"}
-    return {"image_path":"get_result_image/"+rand_file_name,"ance_count":ance_count,**getCurentDateTime()}
+    return {"image_path":"get_result_image/"+rand_file_name,"ance_count":ance_count,**getCurentDateTime(),"skin_type":0}
 # from fastapi import FastAPI
 # app = FastAPI()
 
