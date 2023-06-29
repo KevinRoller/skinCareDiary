@@ -11,13 +11,13 @@ from PIL import Image
 from fastapi.responses import FileResponse
 import cv2
 import datetime
-import recommender
+from recommender import Recommender
 from skin_type_predictor import skin_type_check
 import numpy as np
 
 predictor_api=predictor()
 skin_type_pred=skin_type_check("./model_skin_type.onnx")
-product_rs=recommender("./cosmectic_products.csv")
+product_rs=Recommender("./cosmectic_products.csv")
 file_path="./stored_image/"
 
 # class Settings(BaseSettings):
