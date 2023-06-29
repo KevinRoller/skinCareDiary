@@ -11,8 +11,13 @@ from PIL import Image
 from fastapi.responses import FileResponse
 import cv2
 import datetime
+import recommender
+import skin_type_predictor
+import numpy as np
 
 predictor_api=predictor()
+skin_type_pred=skin_type_predictor("./model_skin_type.onnx")
+product_rs=recommender("./cosmectic_products.csv")
 file_path="./stored_image/"
 
 # class Settings(BaseSettings):
@@ -84,12 +89,17 @@ async def create_upload_file(file: UploadFile):#=File(...)):
     #     print(str(e))
     rand_file_name=generate_random_token()+".jpg"
     pil_image=Image.open(io.BytesIO(content)).convert("RGB")
+    cv_input=np.array(pil_image)
     cv2_image,ance_count=predictor_api(pil_image)
     cv2.imwrite(file_path+rand_file_name,cv2_image)
+    skin_type=skin_type_pred(cv_input)
+    product_list=product_rs.recommend_products(ance_count,skin_type)
     # pil_image.save(file_path+rand_file_name)
 
     #return {"abc":"xyz"}
-    return {"image_path":"get_result_image/"+rand_file_name,"ance_count":ance_count,**getCurentDateTime(),"skin_type":0}
+    result={"image_path":"get_result_image/"+rand_file_name,"ance_count":ance_count,**getCurentDateTime(),"skin_type":skin_type}
+    result.update(product_list)
+    return result
 # from fastapi import FastAPI
 # app = FastAPI()
 

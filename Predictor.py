@@ -5,7 +5,7 @@ import numpy as np
 
 class predictor():
     def __init__(self):
-        self.model = YOLO('best.onnx')
+        self.model = YOLO('yolo8x_more.onnx')
     def __call__(self,img):    
         results = self.model.predict(
             img, classes=0)
