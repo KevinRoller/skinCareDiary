@@ -16,7 +16,7 @@ from skin_type_predictor import skin_type_check
 import numpy as np
 
 predictor_api=predictor()
-skin_type_pred=skin_type_check("./model_skin_type.onnx")
+skin_type_pred=skin_type_check("./yolov5_01.onnx")
 product_rs=Recommender("./cosmectic_products.csv")
 file_path="./stored_image/"
 
