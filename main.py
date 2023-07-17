@@ -1,4 +1,5 @@
-from Predictor import predictor
+# from Predictor import predictor
+from Predictor_yolov5 import predictor_yolov5
 from typing_extensions import Annotated
 
 from fastapi import FastAPI, File, UploadFile
@@ -15,7 +16,7 @@ from recommender import Recommender
 from skin_type_predictor import skin_type_check
 import numpy as np
 
-predictor_api=predictor("./best.onnx")
+predictor_api=predictor_yolov5("./yolov5_01.onnx")
 skin_type_pred=skin_type_check("./model_skin_type.onnx")
 product_rs=Recommender("./cosmectic_products.csv")
 file_path="./stored_image/"
