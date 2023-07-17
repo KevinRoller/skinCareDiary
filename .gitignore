@@ -1,2 +1,4 @@
 stored_image
 *.onnx
+*.jpg
+test_model.py

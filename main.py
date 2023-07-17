@@ -90,8 +90,8 @@ async def create_upload_file(file: UploadFile):#=File(...)):
     rand_file_name=generate_random_token()+".jpg"
     pil_image=Image.open(io.BytesIO(content)).convert("RGB")
     cv_input=np.array(pil_image)
-    cv2_image,ance_count=predictor_api(pil_image)
-    cv2.imwrite(file_path+rand_file_name,cv2_image)
+    result_pil_image,ance_count=predictor_api(pil_image)
+    result_pil_image.save(file_path+rand_file_name)
     skin_type=skin_type_pred(cv_input)
     product_list=product_rs.recommend_products(ance_count,skin_type)
     # pil_image.save(file_path+rand_file_name)
