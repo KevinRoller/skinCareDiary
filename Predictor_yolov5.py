@@ -20,7 +20,7 @@ class yolov5_onnx:
     def __call__(self,im):
         im = im.cpu().numpy()  # torch to numpy
         y = self.session.run(self.output_names, {self.session.get_inputs()[0].name: im})
-        print(y[0].shape)
+        # print(y[0].shape)
         if isinstance(y, (list, tuple)):
             # print("i'm here")
             pred = self.from_numpy(y[0]) if len(y) == 1 else [self.from_numpy(x) for x in y]
